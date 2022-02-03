@@ -20,5 +20,5 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: pack
-    packagesToPack: 'HelloWorldLib/'
+    packagesToPack: 'HelloWorldLib/HelloWorldLib.csproj'
     arguments: '--configuration $(buildConfiguration)'
