@@ -7,21 +7,23 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
-steps:
-- task: DotNetCoreCLI@2
-  displayName: 'Build the solution'
-  inputs:
-    command: build
-    arguments: '--configuration $(buildConfiguration)'
-- task: DotNetCoreCLI@2
-  displayName: 'Run any test projects'
-  inputs:
-    command: test
-    projects: '*Tests/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
-- task: DotNetCoreCLI@2
-  displayName: 'Package the library'
-  inputs:
-    command: pack
-    packagesToPack: 'HelloWorldLib/HelloWorldLib.csproj'
-    arguments: '--configuration $(buildConfiguration)'
+jobs:
+- job: BuildEtc
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: 'Build the solution'
+    inputs:
+      command: build
+      arguments: '--configuration $(buildConfiguration)'
+  - task: DotNetCoreCLI@2
+    displayName: 'Run any test projects'
+    inputs:
+      command: test
+      projects: '*Tests/*.csproj'
+      arguments: '--configuration $(buildConfiguration)'
+  - task: DotNetCoreCLI@2
+    displayName: 'Package the library'
+    inputs:
+      command: pack
+      packagesToPack: 'HelloWorldLib/HelloWorldLib.csproj'
+      arguments: '--configuration $(buildConfiguration)'
